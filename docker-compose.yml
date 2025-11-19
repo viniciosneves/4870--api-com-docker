@@ -1,19 +1,18 @@
-version: '3.8'
-
 services:
-  postgres:
-    image: postgres:15
-    container_name: code-connect-postgres
+  mysql:
+    image: mysql:8.0
+    container_name: code-connect-mysql
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: code_connect
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: code_connect
+      MYSQL_USER: mysql
+      MYSQL_PASSWORD: mysql
     ports:
-      - '5432:5432'
+      - '3306:3306'
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - mysql_data:/var/lib/mysql
     restart: unless-stopped
 
 volumes:
-  postgres_data:
+  mysql_data:
 

@@ -19,7 +19,7 @@ O Code Connect é uma plataforma de compartilhamento de conhecimento onde desenv
 - **[NestJS](https://nestjs.com/)** - Framework Node.js progressivo
 - **[TypeScript](https://www.typescriptlang.org/)** - Superset JavaScript tipado
 - **[Prisma](https://www.prisma.io/)** - ORM moderno para banco de dados
-- **[PostgreSQL](https://www.postgresql.org/)** - Banco de dados relacional
+- **[MySQL](https://www.mysql.com/)** - Banco de dados relacional
 - **[JWT](https://jwt.io/)** - Autenticação via tokens
 - **[bcrypt](https://www.npmjs.com/package/bcrypt)** - Hash de senhas
 - **[Swagger](https://swagger.io/)** - Documentação da API
@@ -57,7 +57,7 @@ Crie um arquivo `.env` na raiz do projeto:
 
 ```env
 # Database
-DATABASE_URL="postgresql://postgres:postgres@localhost:5432/code_connect"
+DATABASE_URL="mysql://root:root@localhost:3306/code_connect"
 
 # JWT
 JWT_SECRET="seu-jwt-secret-super-secreto"
@@ -67,9 +67,11 @@ JWT_EXPIRES_IN="7d"
 PORT=3000
 ```
 
-### 4. Inicie o Banco de Dados (PostgreSQL)
+**Importante**: Use o usuário `root` porque o Prisma precisa de permissões para criar a shadow database durante as migrações.
+
+### 4. Inicie o Banco de Dados (MySQL)
 ```bash
-# Subir o container PostgreSQL
+# Subir o container MySQL
 docker-compose up -d
 
 # Verificar se está rodando
@@ -221,11 +223,11 @@ npx prisma db push
 # Parar containers
 docker-compose down
 
-# Ver logs do PostgreSQL
-docker-compose logs postgres
+# Ver logs do MySQL
+docker-compose logs mysql
 
-# Entrar no container do PostgreSQL
-docker-compose exec postgres psql -U postgres -d code_connect
+# Entrar no container do MySQL
+docker-compose exec mysql mysql -u mysql -p code_connect
 ```
 
 ### Desenvolvimento
